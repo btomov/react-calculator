@@ -1,0 +1,8 @@
+.frame{
+    background: #534D4F;
+    color: white;
+    width:300px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px auto;
+}

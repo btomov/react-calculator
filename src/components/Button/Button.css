@@ -1,0 +1,30 @@
+.btn{
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    font-size: 24px;
+    color: white;
+    height: 20%;
+    min-width: 25%;
+    border: 1px solid #645E5E;
+    padding:15px;
+}
+
+.lightGray{
+    background: #807A7A;
+}
+
+.darkGray{
+    background: #645E60;
+}
+
+.orange{
+    background: #F49E3C;
+}
+
+.zero{
+    width:150px;
+    background: #807A7A;
+}
