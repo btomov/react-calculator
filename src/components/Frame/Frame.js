@@ -7,7 +7,7 @@ const Frame = props =>{
     //We use this to reset the display value if we've just calculated something, unless its a sign/factor
     const [isCalculated, setIsCalculated] = useState(false);
     
-    const signs = ['-', '+'];
+    const signs = ['-', '+', ','];
     const factors = ['/', '*'];
 
     const changeVal =(e) =>{
@@ -17,7 +17,8 @@ const Frame = props =>{
         try{
             lastChar = displayVal.charAt(displayVal.length-1);
         }catch(e){
-            setDisplayVal('Error!');
+            console.log(typeof displayVal);
+            setDisplayVal('Error getting last character!');
         }
 
         if(val === 'clearVal'){
@@ -44,12 +45,17 @@ const Frame = props =>{
             return;
         }
         //If we've hit Calculate and the next character isn't an operator, reset the number (put whatever is incoming)
-        if(isCalculated && (!signs.includes(val) && !factors.includes(val))){
-            setDisplayVal(val);
-            return;
+        
+        if(isCalculated){
+            setIsCalculated(false);
+            if((!signs.includes(val) || !factors.includes(val))){
+                setDisplayVal(val);
+            }else{
+                return;
+            }
         }
+
         //Reset isCalculated so its ready for the next calculation
-        setIsCalculated(false);
 
         if(val === '='){
             calculate();
@@ -74,13 +80,7 @@ const Frame = props =>{
     }
     const calculate = () =>{
         try{
-            //Round down if its a decimal number so we don't overflow
-            let num = eval(displayVal);
-            if(Number.isInteger(num)){
-                setDisplayVal(num);
-            }else{
-                setDisplayVal(num.toFixed(6));
-            }
+            setDisplayVal(eval(displayVal).toString());
             setIsCalculated(true);
         }catch(e){
             setDisplayVal('Error!');
